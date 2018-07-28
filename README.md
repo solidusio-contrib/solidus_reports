@@ -1,7 +1,8 @@
 SolidusReports
 ==============
+[![Build Status](https://travis-ci.org/jtapia/solidus_reports.svg?branch=master)](https://travis-ci.org/jtapia/solidus_reports)
 
-Introduction goes here.
+This extension add the reports module to Solidus Admin. The reports section was extracted into this extension.
 
 Installation
 ------------
