@@ -4,5 +4,7 @@ rvm:
   - 2.3.1
 env:
   matrix:
+    - SOLIDUS_BRANCH=v2.8 DB=postgres
     - SOLIDUS_BRANCH=master DB=postgres
+    - SOLIDUS_BRANCH=v2.8 DB=mysql
     - SOLIDUS_BRANCH=master DB=mysql
