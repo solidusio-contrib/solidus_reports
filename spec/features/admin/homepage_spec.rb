@@ -30,7 +30,7 @@ describe "Homepage", type: :feature do
     it 'should only display tabs fakedispatch has access to' do
       visit spree.admin_path
       expect(page).to have_link('Orders')
-      expect(page).to have_link('Reports')
+      expect(page).not_to have_link('Reports')
       expect(page).not_to have_link('Products')
       expect(page).not_to have_link('Promotions')
       expect(page).not_to have_link('Settings')
