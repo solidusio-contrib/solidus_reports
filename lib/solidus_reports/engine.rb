@@ -9,8 +9,6 @@ module SolidusReports
       g.test_framework :rspec
     end
 
-    config.autoload_paths += %W(#{config.root}/lib)
-
     initializer 'solidus_simple_dash.environment', before: :load_config_initializers do
       SolidusReports::Config = SolidusReports::Configuration.new
     end
