@@ -11,7 +11,7 @@ Installation
 Add solidus_reports to your Gemfile:
 
 ```ruby
-gem 'solidus_reports'
+gem 'solidus_reports', github: 'solidusio-contrib/solidus_reports'
 ```
 
 Bundle your dependencies and run the installation generator:
