@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module SolidusReports
   class Configuration < Spree::Preferences::Configuration
     REPORT_TABS ||= [:reports]

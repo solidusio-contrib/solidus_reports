@@ -67,6 +67,7 @@ module Spree
 
       def adjust_start_date(string_date = nil)
         return Time.current.beginning_of_month if string_date.blank?
+
         Time.zone.parse(string_date).beginning_of_day
       rescue ArgumentError
         Time.current.beginning_of_month

@@ -1,7 +1,9 @@
+# frozen_string_literal: true
+
 source 'https://rubygems.org'
 
 branch = ENV.fetch('SOLIDUS_BRANCH', 'master')
-gem 'solidus', github: 'solidusio/solidus', branch: branch
+gem 'solidus', git: 'https://github.com/solidusio/solidus.git', branch: branch
 
 if branch == 'master' || Gem::Version.new(branch[1..-1]) >= Gem::Version.new('2.0.0')
   gem 'rails-controller-testing', group: :test
@@ -14,7 +16,7 @@ end
 if branch == 'master' || Gem::Version.new(branch[1..-1]) >= Gem::Version.new('2.10.0')
   gem 'rails', '~> 6.0'
 else
-  gem 'rails', '~> 5.0'
+  gem 'rails', '~> 5.0' # rubocop:disable Bundler/DuplicatedGem
 end
 
 if ENV['DB'] == 'mysql'
