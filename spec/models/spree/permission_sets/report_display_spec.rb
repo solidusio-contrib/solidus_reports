@@ -3,9 +3,9 @@
 require 'spec_helper'
 
 RSpec.describe Spree::PermissionSets::ReportDisplay do
-  let(:ability) { DummyAbility.new }
-
   subject { ability }
+
+  let(:ability) { DummyAbility.new }
 
   context 'when activated' do
     before do

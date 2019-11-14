@@ -1,18 +1,11 @@
-ENV['RAILS_ENV'] = 'test'
+# frozen_string_literal: true
 
-require File.expand_path('../dummy/config/environment.rb', __FILE__)
+ENV['RAILS_ENV'] ||= 'test'
 
-require 'rspec/rails'
-require 'rspec-activemodel-mocks'
+require 'solidus_extension_dev_tools/rspec/coverage'
+
+require File.expand_path('dummy/config/environment.rb', __dir__)
+
+require 'solidus_extension_dev_tools/rspec/feature_helper'
 
 Dir[File.join(File.dirname(__FILE__), 'support/**/*.rb')].each { |f| require f }
-
-require 'solidus_reports/factories'
-
-RSpec.configure do |config|
-  config.infer_spec_type_from_file_location!
-  config.include Spree::TestingSupport::UrlHelpers
-  config.fixture_path = "#{::Rails.root}/spec/fixtures"
-  config.use_transactional_fixtures = false
-  config.fail_fast = ENV['FAIL_FAST'] || false
-end

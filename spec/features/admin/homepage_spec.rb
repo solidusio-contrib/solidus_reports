@@ -7,11 +7,11 @@ describe "Homepage", type: :feature do
     stub_authorization!
 
     context "visiting the homepage" do
-      before(:each) do
+      before do
         visit spree.admin_path
       end
 
-      it "should have a link to reports" do
+      it "has a link to reports" do
         expect(page).to have_link("Reports", href: "/admin/reports")
       end
     end
@@ -27,7 +27,7 @@ describe "Homepage", type: :feature do
       can [:admin, :edit, :index, :read], Spree::Order
     end
 
-    it 'should only display tabs fakedispatch has access to' do
+    it 'onlies display tabs fakedispatch has access to' do
       visit spree.admin_path
       expect(page).to have_link('Orders')
       expect(page).not_to have_link('Reports')
