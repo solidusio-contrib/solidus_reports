@@ -1,6 +1,8 @@
+# frozen_string_literal: true
+
 module SolidusReports
   class Configuration < Spree::Preferences::Configuration
-    REPORT_TABS ||= [:reports]
+    REPORT_TABS ||= [:reports].freeze
 
     new_item = Spree::BackendConfiguration::MenuItem.new(
       REPORT_TABS,

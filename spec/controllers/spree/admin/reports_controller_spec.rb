@@ -5,18 +5,24 @@ require 'spec_helper'
 describe Spree::Admin::ReportsController, type: :controller do
   stub_authorization!
 
+  after do
+    described_class.available_reports.delete_if do |key, _value|
+      key != :sales_total
+    end
+  end
+
   describe 'ReportsController.available_reports' do
-    it 'should contain sales_total' do
-      expect(Spree::Admin::ReportsController.available_reports.keys.include?(:sales_total)).to be true
+    it 'contains sales_total' do
+      expect(described_class.available_reports.key?(:sales_total)).to be true
     end
   end
 
   describe 'ReportsController.add_available_report!' do
     context 'when adding the report name' do
-      it 'should contain the report' do
-        Spree::Admin::ReportsController.add_available_report!(:some_report)
-        expect(Spree::Admin::ReportsController.available_reports.keys.include?(:some_report)).to be true
-        expect(Spree::Admin::ReportsController.available_reports[:some_report]).to eq(
+      it 'contains the report' do
+        described_class.add_available_report!(:some_report)
+        expect(described_class.available_reports.key?(:some_report)).to be true
+        expect(described_class.available_reports[:some_report]).to eq(
           name: :some_report,
           description: 'some_report_description'
         )
@@ -25,6 +31,8 @@ describe Spree::Admin::ReportsController, type: :controller do
   end
 
   describe 'GET sales_total' do
+    subject { get :sales_total, params: params }
+
     let!(:order_complete_start_of_month) { create(:completed_order_with_totals) }
     let!(:order_complete_mid_month) { create(:completed_order_with_totals) }
     let!(:order_non_complete) { create(:order, completed_at: nil) }
@@ -38,29 +46,27 @@ describe Spree::Admin::ReportsController, type: :controller do
       order_complete_mid_month.save!
     end
 
-    subject { get :sales_total, params: params }
-
     shared_examples 'sales total report' do
-      it 'should respond with success' do
+      it 'responds with success' do
         expect(response).to be_successful
       end
 
-      it 'should set search to be a ransack search' do
+      it 'sets search to be a ransack search' do
         subject
         expect(assigns(:search)).to be_a Ransack::Search
       end
 
-      it 'should set orders correctly for date parameters' do
+      it 'sets orders correctly for date parameters' do
         subject
         expect(assigns(:orders)).to eq expected_returned_orders
       end
 
       it 'does not include non-complete orders' do
         subject
-        expect(assigns(:orders)).to_not include(order_non_complete)
+        expect(assigns(:orders)).not_to include(order_non_complete)
       end
 
-      it 'should correctly set the totals hash' do
+      it 'correctlies set the totals hash' do
         subject
         expect(assigns(:totals)).to eq expected_totals
       end
@@ -119,15 +125,9 @@ describe Spree::Admin::ReportsController, type: :controller do
   end
 
   describe 'GET index' do
-    it 'should be ok' do
+    it 'is ok' do
       get :index
       expect(response).to be_ok
-    end
-  end
-
-  after(:each) do
-    Spree::Admin::ReportsController.available_reports.delete_if do |key, _value|
-      key != :sales_total
     end
   end
 end

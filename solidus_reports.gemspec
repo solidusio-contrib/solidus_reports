@@ -1,5 +1,6 @@
-# encoding: UTF-8
-$:.push File.expand_path('../lib', __FILE__)
+# frozen_string_literal: true
+
+$:.push File.expand_path('lib', __dir__)
 require 'solidus_reports/version'
 
 Gem::Specification.new do |s|
