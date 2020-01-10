@@ -38,4 +38,13 @@ Simply add this require statement to your spec_helper:
 require 'solidus_reports/factories'
 ```
 
-Copyright (c) 2018 [name of extension creator], released under the New BSD License
+Releasing
+---------
+ 
+Your new extension version can be released using `gem-release` like this:
+ 
+```shell
+bundle exec gem bump -v VERSION --tag --push --remote upstream && gem release
+```
+ 
+Copyright (c) 2020 [name of extension creator], released under the New BSD License
