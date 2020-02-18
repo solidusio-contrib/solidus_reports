@@ -7,7 +7,7 @@ module SolidusReports
     new_item = Spree::BackendConfiguration::MenuItem.new(
       REPORT_TABS,
       'file',
-      condition: -> { can?(:admin, REPORT_TABS) }
+      condition: -> { can?(:admin, :reports) }
     )
     Spree::Backend::Config.menu_items << new_item
   end
