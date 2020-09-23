@@ -26,7 +26,8 @@ Usage
 To create a report, you need to:
 
 Extend the ReportsController in a decorator to create the action
-````
+
+```ruby
 # app/decorators/awesome_store/spree/admin/reports_controller/add_my_report_decorator.rb
 module AwesomeStore
   module Spree
@@ -47,10 +48,10 @@ module AwesomeStore
     end
   end
 end
-````
+```
 
 Create a route in routes.rb
-````
+```ruby
 Spree::Core::Engine.routes.draw do
     namespace :admin do
       resources :reports, only: [:index] do
@@ -66,7 +67,7 @@ Spree::Core::Engine.routes.draw do
 Create a template in app/views/spree/admin/reports/my_report.html.erb
 
 Add an entry into your Translations 
-````
+```yaml
 # config/locales/en.yml
 en:
   hello: "Hello world"
