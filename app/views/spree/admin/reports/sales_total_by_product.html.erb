@@ -1,0 +1,56 @@
+<% admin_breadcrumb(link_to t('spree.reports'), spree.admin_reports_path) %>
+<% admin_breadcrumb(t('spree.sales_total_by_product')) %>
+
+<% content_for :page_actions do %>
+<% end %>
+
+
+<% content_for :table_filter_title do %>
+  <%= t('spree.date_range') %>
+<% end %>
+
+<% content_for :table_filter do %>
+  <%= render partial: 'spree/admin/shared/report_order_criteria', locals: { action: :sales_total_by_product } %>
+<% end %>
+
+<table class="admin-report" data-hook="sales_total">
+  <thead>
+  <tr>
+    <th><%= t('spree.currency') %></th>
+    <th><%= t('spree.product') %></th>
+    <th><%= t('spree.quantity') %></th>
+    <th><%= t('spree.item_price') %></th>
+    <th><%= t('spree.sales_total') %></th>
+  </tr>
+  </thead>
+  <tbody>
+  <% @totals.each do |currency, report| %>
+    <% report[:data].each do |variant_id, row| %>
+      <tr>
+        <td><%= currency %></td>
+        <td>
+          <% if (variant = ::Spree::Variant.where(id: variant_id).first) %>
+            <%= link_to variant.name, variant.product, target: '_blank' %>
+          <% else %>
+            Unknown
+          <% end %>
+        </td>
+        <td><%= row[:quantity] %></td>
+        <td><%= row[:item_price].format %></td>
+        <td><%= row[:sales_total].format %></td>
+      </tr>
+    <% end %>
+    <tr>
+      <td><strong><%=t('spree.total') %> <%= currency %></strong></td>
+      <td>
+      </td>
+      <td><strong><%= report[:quantity_total] %></strong></td>
+      <td></td>
+      <td><strong><%= report[:sales_total].format %></strong></td>
+    </tr>
+  <% end %>
+  </tbody>
+</table>
+<div style="text-align: center">
+  <i>Not including tax, shipping, and adjustments</i>
+</div>

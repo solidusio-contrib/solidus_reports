@@ -6,4 +6,7 @@ en:
     admin:
       tab:
         reports: Reports
+    item_price: Item Price
+    sales_total_by_product: Sales Total by Product
+    sales_total_by_product_description: Sales Totals by Products
     reports: Reports

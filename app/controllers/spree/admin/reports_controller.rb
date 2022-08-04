@@ -25,10 +25,45 @@ module Spree
       def initialize
         super
         ReportsController.add_available_report!(:sales_total)
+        ReportsController.add_available_report!(:sales_total_by_product)
       end
 
       def index
         @reports = ReportsController.available_reports
+      end
+
+      def sales_total_by_product
+        params[:q] = search_params
+
+        @search = Order.complete.not_canceled.ransack(params[:q])
+        @orders = @search.result
+
+        @totals = {}
+        @orders.each do |order|
+          unless @totals[order.currency]
+            @totals[order.currency] = {
+              data: {},
+              quantity_total: 0,
+              sales_total: ::Money.new(0, order.currency)
+            }
+          end
+
+          order.line_items.each do |line_item|
+            unless @totals[order.currency][:data][line_item.variant_id]
+              @totals[order.currency][:data][line_item.variant_id] = {
+                quantity: 0,
+                item_price: line_item.display_price,
+                sales_total: ::Money.new(0, order.currency)
+              }
+            end
+
+            @totals[order.currency][:data][line_item.variant_id][:quantity] += line_item.quantity
+            @totals[order.currency][:data][line_item.variant_id][:sales_total] += line_item.display_amount.money
+
+            @totals[order.currency][:quantity_total] += line_item.quantity
+            @totals[order.currency][:sales_total] += line_item.display_amount.money
+          end
+        end
       end
 
       def sales_total
