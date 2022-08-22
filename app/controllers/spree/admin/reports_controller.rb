@@ -35,7 +35,7 @@ module Spree
       def sales_total_by_product
         params[:q] = search_params
 
-        @search = Order.complete.not_canceled.ransack(params[:q])
+        @search = Order.complete.not_canceled.where(payment_state: "paid").ransack(params[:q])
         @orders = @search.result
 
         @totals = {}
@@ -69,8 +69,10 @@ module Spree
       def sales_total
         params[:q] = search_params
 
-        @search = Order.complete.not_canceled.ransack(params[:q])
+        @search = Order.complete.not_canceled.where(payment_state: "paid").ransack(params[:q])
         @orders = @search.result
+
+        Rails.logger.info("Orders Total: #{@orders.count}")
 
         @totals = {}
         @orders.each do |order|
