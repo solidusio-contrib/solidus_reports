@@ -23,7 +23,7 @@ describe "Homepage", type: :feature do
     end
 
     custom_authorization! do |_user|
-      can [:admin, :home], :dashboards
+      cannot :admin, :reports
       can [:admin, :edit, :index, :read], Spree::Order
     end
 
@@ -31,9 +31,6 @@ describe "Homepage", type: :feature do
       visit spree.admin_path
       expect(page).to have_link('Orders')
       expect(page).not_to have_link('Reports')
-      expect(page).not_to have_link('Products')
-      expect(page).not_to have_link('Promotions')
-      expect(page).not_to have_link('Settings')
     end
   end
 end
