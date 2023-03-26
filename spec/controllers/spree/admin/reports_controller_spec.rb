@@ -2,7 +2,7 @@
 
 require 'spec_helper'
 
-describe Spree::Admin::ReportsController, type: :controller do
+describe Spree::Admin::ReportsController do
   stub_authorization!
 
   after do
