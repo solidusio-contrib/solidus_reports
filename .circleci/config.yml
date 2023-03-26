@@ -14,7 +14,7 @@ jobs:
   run-specs-with-postgres:
     executor:
       name: solidusio_extensions/postgres
-      ruby_version: '3.1'
+      ruby_version: "3.2"
     steps:
       - checkout
       - browser-tools/install-chrome
@@ -24,7 +24,7 @@ jobs:
   run-specs-with-mysql:
     executor:
       name: solidusio_extensions/mysql
-      ruby_version: '3.0'
+      ruby_version: "3.1"
     steps:
       - checkout
       - browser-tools/install-chrome
@@ -34,7 +34,7 @@ jobs:
   run-specs-with-sqlite:
     executor:
       name: solidusio_extensions/sqlite
-      ruby_version: '2.7'
+      ruby_version: "3.0"
     steps:
       - checkout
       - browser-tools/install-chrome
