@@ -19,6 +19,7 @@ gem 'rails', '>0.a'
 
 # Provides basic authentication functionality for testing parts of your engine
 gem 'solidus_auth_devise'
+gem 'solidus_dev_support'
 
 case ENV['DB']
 when 'mysql'
@@ -29,6 +30,9 @@ else
   gem 'sqlite3'
 end
 
-gem 'rails-controller-testing', group: :test
+group :test do
+  gem 'rails-controller-testing'
+  gem 'rspec-activemodel-mocks'
+end
 
 gemspec
