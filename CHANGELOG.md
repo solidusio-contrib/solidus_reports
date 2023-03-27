@@ -1,5 +1,14 @@
 # Changelog
 
+## [v1.2.0](https://github.com/solidusio-contrib/solidus_reports/tree/v1.2.0) (2023-03-27)
+
+[Full Changelog](https://github.com/solidusio-contrib/solidus_reports/compare/v1.1.0...v1.2.0)
+
+**Merged pull requests:**
+
+- Test with Ruby 3.2 [\#45](https://github.com/solidusio-contrib/solidus_reports/pull/45) ([tvdeyen](https://github.com/tvdeyen))
+- Add ruby 3 support [\#44](https://github.com/solidusio-contrib/solidus_reports/pull/44) ([elia](https://github.com/elia))
+
 ## [v1.1.0](https://github.com/solidusio-contrib/solidus_reports/tree/v1.1.0) (2022-10-13)
 
 [Full Changelog](https://github.com/solidusio-contrib/solidus_reports/compare/v1.0.0...v1.1.0)
