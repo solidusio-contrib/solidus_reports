@@ -16,7 +16,7 @@ module SolidusReports
     end
 
     initializer "solidus_reports.environment", before: :load_config_initializers do
-      require_dependency "solidus_reports/configuration"
+      require "solidus_reports/configuration"
       SolidusReports::Config = SolidusReports::Configuration.new
     end
   end
