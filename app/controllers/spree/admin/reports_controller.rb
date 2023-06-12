@@ -44,7 +44,8 @@ module Spree
             @totals[order.currency] = {
               data: {},
               quantity_total: 0,
-              sales_total: ::Money.new(0, order.currency)
+              sales_total: ::Money.new(0, order.currency),
+              adjusted_total: ::Money.new(0, order.currency)
             }
           end
 
@@ -53,15 +54,18 @@ module Spree
               @totals[order.currency][:data][line_item.variant_id] = {
                 quantity: 0,
                 item_price: line_item.display_price,
-                sales_total: ::Money.new(0, order.currency)
+                sales_total: ::Money.new(0, order.currency),
+                adjusted_total: ::Money.new(0, order.currency)
               }
             end
 
             @totals[order.currency][:data][line_item.variant_id][:quantity] += line_item.quantity
             @totals[order.currency][:data][line_item.variant_id][:sales_total] += line_item.display_amount.money
+            @totals[order.currency][:data][line_item.variant_id][:adjusted_total] += line_item.display_total.money
 
             @totals[order.currency][:quantity_total] += line_item.quantity
             @totals[order.currency][:sales_total] += line_item.display_amount.money
+            @totals[order.currency][:adjusted_total] += line_item.display_total.money
           end
         end
       end

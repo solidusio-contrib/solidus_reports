@@ -21,6 +21,7 @@
     <th><%= t('spree.quantity') %></th>
     <th><%= t('spree.item_price') %></th>
     <th><%= t('spree.sales_total') %></th>
+    <th><%= t('spree.adjusted_total') %></th>
   </tr>
   </thead>
   <tbody>
@@ -38,6 +39,7 @@
         <td><%= row[:quantity] %></td>
         <td><%= row[:item_price].format %></td>
         <td><%= row[:sales_total].format %></td>
+        <td><%= row[:adjusted_total].format %></td>
       </tr>
     <% end %>
     <tr>
@@ -47,6 +49,7 @@
       <td><strong><%= report[:quantity_total] %></strong></td>
       <td></td>
       <td><strong><%= report[:sales_total].format %></strong></td>
+      <td><strong><%= report[:adjusted_total].format %></strong></td>
     </tr>
   <% end %>
   </tbody>
