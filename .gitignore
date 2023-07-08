@@ -15,3 +15,7 @@ pkg
 spec/dummy
 spec/examples.txt
 .ruby-version
+Gemfile-local
+/sandbox
+.rvmrc
+.ruby-gemset
