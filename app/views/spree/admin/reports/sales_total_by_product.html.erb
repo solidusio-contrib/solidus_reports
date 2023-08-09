@@ -38,8 +38,8 @@
         </td>
         <td><%= row[:quantity] %></td>
         <td><%= row[:item_price].format %></td>
-        <td><%= row[:sales_total].format %></td>
-        <td><%= row[:adjusted_total].format %></td>
+        <td><%= ::Money.new(row[:sales_total], currency).format %></td>
+        <td><%= ::Money.new(row[:adjusted_total] * 100, currency).format %></td>
       </tr>
     <% end %>
     <tr>
@@ -48,8 +48,8 @@
       </td>
       <td><strong><%= report[:quantity_total] %></strong></td>
       <td></td>
-      <td><strong><%= report[:sales_total].format %></strong></td>
-      <td><strong><%= report[:adjusted_total].format %></strong></td>
+      <td><strong><%= ::Money.new(report[:sales_total], currency).format %></strong></td>
+      <td><strong><%= ::Money.new(report[:adjusted_total] * 100, currency).format %></strong></td>
     </tr>
   <% end %>
   </tbody>
