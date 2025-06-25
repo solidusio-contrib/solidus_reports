@@ -19,12 +19,11 @@ module SolidusReports
     initializer "solidus_reports.environment", before: :load_config_initializers do
       REPORT_TABS ||= [:reports].freeze
 
-      new_item = Spree::BackendConfiguration::MenuItem.new(
-        REPORT_TABS,
-        'file',
+      Spree::Backend::Config.class::MenuItem.new(
+        label: :reports,
+        icon: 'file',
         condition: -> { can?(:admin, :reports) }
       )
-      Spree::Backend::Config.menu_items << new_item
     end
   end
 end
