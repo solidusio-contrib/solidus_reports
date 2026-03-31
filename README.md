@@ -1,8 +1,6 @@
 SolidusReports
 ==============
 
-[![CircleCI](https://circleci.com/gh/solidusio-contrib/solidus_reports.svg?style=svg)](https://circleci.com/gh/solidusio-contrib/solidus_reports)
-
 This extension add the reports module to Solidus Admin. The reports section was extracted into this extension.
 
 Installation
@@ -40,11 +38,11 @@ require 'solidus_reports/factories'
 
 Releasing
 ---------
- 
+
 Your new extension version can be released using `gem-release` like this:
- 
+
 ```shell
 bundle exec gem bump -v VERSION --tag --push --remote upstream && gem release
 ```
- 
+
 Copyright (c) 2020 [name of extension creator], released under the New BSD License

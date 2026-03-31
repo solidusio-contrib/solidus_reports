@@ -17,7 +17,7 @@ module Spree
 
           @@available_reports[report_key] = {
             name: report_key,
-            description: report_description_key,
+            description: report_description_key
           }
         end
       end
@@ -61,7 +61,7 @@ module Spree
         params.fetch(:q, {}).tap do |q|
           q[:completed_at_gt] = adjust_start_date q[:completed_at_gt]
           q[:completed_at_lt] = adjust_end_date(q[:completed_at_lt]) if q[:completed_at_lt].present?
-          q[:s] ||= 'completed_at desc'
+          q[:s] ||= "completed_at desc"
         end
       end
 

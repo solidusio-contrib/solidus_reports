@@ -1,13 +1,13 @@
 # frozen_string_literal: true
 
-require 'spec_helper'
+require "spec_helper"
 
 RSpec.describe Spree::PermissionSets::ReportDisplay do
   subject { ability }
 
   let(:ability) { DummyAbility.new }
 
-  context 'when activated' do
+  context "when activated" do
     before do
       described_class.new(ability).activate!
     end
