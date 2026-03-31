@@ -1,3 +1,3 @@
 # frozen_string_literal: true
 
-require 'rspec-activemodel-mocks'
+require "rspec-activemodel-mocks"

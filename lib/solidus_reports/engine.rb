@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
-require 'solidus_core'
-require 'solidus_support'
+require "solidus_core"
+require "solidus_support"
 
 module SolidusReports
   class Engine < Rails::Engine
@@ -9,7 +9,7 @@ module SolidusReports
 
     isolate_namespace ::Spree
 
-    engine_name 'solidus_reports'
+    engine_name "solidus_reports"
 
     # use rspec for tests
     config.generators do |g|
@@ -21,7 +21,7 @@ module SolidusReports
 
       new_item = Spree::BackendConfiguration::MenuItem.new(
         REPORT_TABS,
-        'file',
+        "file",
         condition: -> { can?(:admin, :reports) }
       )
       Spree::Backend::Config.menu_items << new_item
