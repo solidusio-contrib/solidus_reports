@@ -17,15 +17,9 @@ module SolidusReports
     end
 
     initializer "solidus_reports.environment", before: :load_config_initializers do
-      # rubocop:disable Lint/ConstantDefinitionInBlock
-      # rubocop:disable Lint/OrAssignmentToConstant
-      REPORT_TABS ||= [:reports].freeze
-      # rubocop:enable Lint/ConstantDefinitionInBlock
-      # rubocop:enable Lint/OrAssignmentToConstant
-
       new_item = Spree::BackendConfiguration::MenuItem.new(
-        REPORT_TABS,
-        "file",
+        label: :reports,
+        icon: "file",
         condition: -> { can?(:admin, :reports) }
       )
       Spree::Backend::Config.menu_items << new_item
