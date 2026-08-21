@@ -25,17 +25,62 @@ module Spree
       def initialize
         super
         ReportsController.add_available_report!(:sales_total)
+        ReportsController.add_available_report!(:sales_total_by_product)
       end
 
       def index
         @reports = ReportsController.available_reports
       end
 
+      def sales_total_by_product
+        params[:q] = search_params
+
+        @search = Order.complete.not_canceled.where(payment_state: "paid").ransack(params[:q])
+        @orders = @search.result
+
+        @totals = {}
+        @orders.each do |order|
+          unless @totals[order.currency]
+            @totals[order.currency] = {
+              data: {},
+              quantity_total: 0,
+              sales_total: 0,
+              adjusted_total: 0
+            }
+          end
+
+          order.line_items.each do |line_item|
+            unless @totals[order.currency][:data][line_item.variant_id]
+              @totals[order.currency][:data][line_item.variant_id] = {
+                quantity: 0,
+                item_price: line_item.display_price,
+                sales_total: 0,
+                adjusted_total: 0
+              }
+            end
+
+            @totals[order.currency][:data][line_item.variant_id][:quantity] += line_item.quantity
+            @totals[order.currency][:data][line_item.variant_id][:sales_total] += line_item.display_amount.money
+            @totals[order.currency][:data][line_item.variant_id][:adjusted_total] += line_item.price + order.adjustment_total
+          end
+        end
+
+        @totals.each do |currency, data|
+          @totals[currency][:data].each do |variant_id, data|
+            @totals[currency][:quantity_total] += data[:quantity]
+            @totals[currency][:sales_total] += data[:sales_total]
+            @totals[currency][:adjusted_total] += data[:adjusted_total]
+          end
+        end
+      end
+
       def sales_total
         params[:q] = search_params
 
-        @search = Order.complete.not_canceled.ransack(params[:q])
+        @search = Order.complete.not_canceled.where(payment_state: "paid").ransack(params[:q])
         @orders = @search.result
+
+        Rails.logger.info("Orders Total: #{@orders.count}")
 
         @totals = {}
         @orders.each do |order|
